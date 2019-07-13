@@ -1,7 +1,17 @@
 import React from 'react';
 import Card from './Card';
+import './List.css';
+// import STORE from './s'
 
 function List(props) {
+    const cardsList = props.cards.map(cardObject => {
+        return (
+            <Card 
+                title={cardObject.title} 
+                content={cardObject.content}
+            />
+        )
+    });
 
     return (
         <section className="List">
@@ -9,10 +19,7 @@ function List(props) {
                 <h2>{props.header}</h2>
             </header>
             <div className="List-cards">
-                <Card 
-                    title={props.title}
-                    content={props.content}
-                />
+                {cardsList}
             </div>
         </section>
     );

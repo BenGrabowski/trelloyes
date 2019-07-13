@@ -1,13 +1,13 @@
 import React from 'react';
 import List from './composition/List';
-import STORE from './store';
+import './App.css';
 
 function App(props) {
-  const listArray = STORE.lists.map(listObject => {
+  const listArray = props.store.lists.map(listObject => {
     return <List 
               key={listObject.id} 
               header={listObject.header} 
-              cards={listObject.cardIds}
+              cards={listObject.cardIds.map(id => props.store.allCards[id])}
               />
   });
   
@@ -17,16 +17,7 @@ function App(props) {
         <h1>Trelloyes!</h1>
       </header>
       <div className="App-List">
-        {/* <List header={STORE.lists[0].header} 
-              cards={STORE.allCards}/>
-        <List header={STORE.lists[1].header}
-               cards={STORE.allCards}/>
-        <List header={STORE.lists[2].header}
-              cards={STORE.allCards} />
-        <List header={STORE.lists[3].header}
-  cards={STORE.allCards} /> */}
-
-      {listArray}
+        {listArray}
       </div>  
     </main>
   );
