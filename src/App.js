@@ -16,7 +16,7 @@ function App(props) {
       <header className="App-header">
         <h1>Trelloyes!</h1>
       </header>
-      <div className="App-List">
+      <div className="App-list">
         {listArray}
       </div>  
     </main>
