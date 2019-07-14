@@ -9,6 +9,7 @@ function List(props) {
             <Card 
                 title={cardObject.title} 
                 content={cardObject.content}
+                key = {cardObject.id}
             />
         )
     });
