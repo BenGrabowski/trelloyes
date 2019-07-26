@@ -10,6 +10,9 @@ function List(props) {
                 title={cardObject.title} 
                 content={cardObject.content}
                 key = {cardObject.id}
+                id = {cardObject.id}
+                index = {props.index}
+                onDeleteCard = {props.onDeleteCard}
             />
         )
     });
@@ -21,12 +24,9 @@ function List(props) {
             </header>
             <div className="List-cards">
                 {cardsList}
-                <button
-          type='button'
-          className='List-add-button'
-        >
-          + Add Random Card
-        </button>
+                <button type='button' className='List-add-button'>
+                    + Add Random Card
+                </button>
             </div>
         </section>
     );
