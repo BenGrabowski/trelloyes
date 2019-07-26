@@ -47,12 +47,25 @@ class App extends React.Component {
   
   handleDeleteCard = (card, index) => {
     console.log(card, index)
-    const newCardIds = this.state.STORE.lists[index].cardIds.filter(newCard => newCard !== card)
+    const newCardIds = this.state.STORE.lists[index].cardIds.filter(newCard => newCard !== card);
     console.log(newCardIds)
+    // this.state.STORE.lists[index].cardIds = newCardIds;
+    let tempStore = Object.assign({}, this.state.STORE);
+    tempStore.lists[index].cardIds = newCardIds;
     //How do I replace the old cardIds array with the newCardIds?
-    
-    // this.setState({STORE: newSTORE});
+    this.setState({STORE: this.state.STORE});
   }
+
+  // newRandomCard = () => {
+  //   const id = Math.random().toString(36).substring(2, 4)
+  //     + Math.random().toString(36).substring(2, 4);
+  //   return {
+  //     id,
+  //     title: `Random Card ${id}`,
+  //     content: 'lorem ipsum',
+  //   }
+  //   console.log('random card was clicked');
+  // }
    
 
   render() {
@@ -62,6 +75,7 @@ class App extends React.Component {
                 header={listObject.header} 
                 cards={listObject.cardIds.map(id => this.state.STORE.allCards[id])}
                 onDeleteCard={this.handleDeleteCard}
+                onRandomCard={this.newRandomCard}
                 index = {i}
                 />
     });
