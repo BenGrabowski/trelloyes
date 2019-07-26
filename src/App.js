@@ -2,7 +2,18 @@ import React from 'react';
 import List from './composition/List';
 import './App.css';
 
+const newRandomCard = () => {
+  const id = Math.random().toString(36).substring(2, 4)
+    + Math.random().toString(36).substring(2, 4);
+  return {
+    id,
+    title: `Random Card ${id}`,
+    content: 'lorem ipsum',
+  }
+}
+
 class App extends React.Component {
+  
   state = {
     STORE: {
       lists: [
@@ -49,23 +60,34 @@ class App extends React.Component {
     console.log(card, index)
     const newCardIds = this.state.STORE.lists[index].cardIds.filter(newCard => newCard !== card);
     console.log(newCardIds)
-    // this.state.STORE.lists[index].cardIds = newCardIds;
     let tempStore = Object.assign({}, this.state.STORE);
     tempStore.lists[index].cardIds = newCardIds;
-    //How do I replace the old cardIds array with the newCardIds?
-    this.setState({STORE: this.state.STORE});
+    this.setState({STORE: tempStore});
   }
 
-  // newRandomCard = () => {
-  //   const id = Math.random().toString(36).substring(2, 4)
-  //     + Math.random().toString(36).substring(2, 4);
-  //   return {
-  //     id,
-  //     title: `Random Card ${id}`,
-  //     content: 'lorem ipsum',
-  //   }
-  //   console.log('random card was clicked');
-  // }
+  handleRandomCard = (index) => {
+    const newCard = newRandomCard();
+
+    const newLists = this.state.STORE.lists.map(list => {
+      if (list.id === index) {
+        return {
+          ...list,
+          cardIds: [...list.cardIds, newCard.id]
+        };
+      }
+      return list;
+    })
+    
+    this.setState({
+      STORE: {
+        lists: newLists,
+        allCards: {
+          ...this.state.STORE.allCards,
+          [newCard.id]: newCard
+        }
+      }
+    })
+}
    
 
   render() {
@@ -75,7 +97,7 @@ class App extends React.Component {
                 header={listObject.header} 
                 cards={listObject.cardIds.map(id => this.state.STORE.allCards[id])}
                 onDeleteCard={this.handleDeleteCard}
-                onRandomCard={this.newRandomCard}
+                onRandomCard={this.handleRandomCard}
                 index = {i}
                 />
     });

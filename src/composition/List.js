@@ -26,13 +26,17 @@ function List(props) {
             <div className="List-cards">
                 {cardsList}
                 <button type='button' className='List-add-button' 
-                        // onClick={() => props.onRandomCard()}
+                        onClick={() => props.onRandomCard(props.index)}
                         >
                     + Add Random Card
                 </button>
             </div>
         </section>
     );
+}
+
+List.defaultProps = {
+    onRandomCard: () => {},
 }
 
 export default List;
