@@ -26,7 +26,7 @@ function List(props) {
             <div className="List-cards">
                 {cardsList}
                 <button type='button' className='List-add-button' 
-                        onClick={() => props.onRandomCard(props.index)}
+                        onClick={() => props.onRandomCard(props.id)}
                         >
                     + Add Random Card
                 </button>

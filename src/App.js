@@ -93,7 +93,8 @@ class App extends React.Component {
   render() {
     const listArray = this.state.STORE.lists.map((listObject, i) => {
       return <List 
-                key={listObject.id} 
+                key={listObject.id}
+                id={listObject.id} 
                 header={listObject.header} 
                 cards={listObject.cardIds.map(id => this.state.STORE.allCards[id])}
                 onDeleteCard={this.handleDeleteCard}
